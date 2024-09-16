@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Alumnos" %>
+
+<h1>Alumnos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Colegio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @alumnos.each do |alumno| %>
+      <tr>
+        <td><%= alumno.nombre %></td>
+        <td><%= alumno.colegio.nombre %></td>   
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New alumno", new_alumno_path %>

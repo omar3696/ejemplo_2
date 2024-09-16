@@ -1,0 +1,11 @@
+<% content_for :title, "New nota" %>
+
+<h1>New nota</h1>
+
+<%= render "form", nota: @nota %>
+
+<br>
+
+<div>
+  <%= link_to "Back to notas", notas_path %>
+</div>

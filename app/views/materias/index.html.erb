@@ -1,0 +1,48 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Materias" %>
+
+<h1>Materias</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Alumno</th>
+      <th>Nota</th>
+      <th>Profesor</th>
+      <th>Colegio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @materias.each do |materia| %>
+      <tr>
+        <td>
+          <li><%= materia.nombre %></li>
+        </td>
+        <td>
+          <ul>
+            <% materia.notas.each do |nota| %>
+              <li>Alumno: <%= nota.alumno.nombre %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <% materia.notas.each do |nota| %>
+              <li>Nota: <%= nota.nota %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
+          <li><%= materia.profesor.nombre %></li>
+        </td>
+        <td>
+          <li><%= materia.colegio.nombre %></li>
+        </td>   
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New materia", new_materia_path %>

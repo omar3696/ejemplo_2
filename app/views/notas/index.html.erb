@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Notas" %>
+
+<h1>Notas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nota</th>
+      <th>Alumno</th>
+      <th>Materia</th>
+      <th>Colegio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notas.each do |nota| %>
+      <tr>
+        <td><%= nota.nota %></td>
+        <td><%= nota.alumno.nombre %></td>
+        <td><%= nota.materia.nombre %></td> 
+        <td><%= nota.colegio.nombre %></td>   
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New nota", new_nota_path %>
