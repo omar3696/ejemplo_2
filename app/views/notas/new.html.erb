@@ -1,11 +1,12 @@
-<% content_for :title, "New nota" %>
+<% content_for :title, "Nueva nota" %>
 
-<h1>New nota</h1>
+<h1>Nueva nota</h1>
 
 <%= render "form", nota: @nota %>
 
 <br>
 
+
 <div>
-  <%= link_to "Back to notas", notas_path %>
+  <%= link_to "Volver a notas", notas_path, class: "btn btn-secondary" %>
 </div>

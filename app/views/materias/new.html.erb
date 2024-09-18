@@ -1,11 +1,11 @@
-<% content_for :title, "New materia" %>
+<% content_for :title, "Nuevo materia" %>
 
-<h1>New materia</h1>
+<h1>Nueva materia</h1>
 
 <%= render "form", materia: @materia %>
 
 <br>
 
 <div>
-  <%= link_to "Back to materias", materias_path %>
+  <%= link_to "Volver a materias", materias_path, class: "btn btn-secondary" %>
 </div>

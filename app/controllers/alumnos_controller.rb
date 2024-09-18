@@ -8,15 +8,19 @@ class AlumnosController < ApplicationController
 
   # GET /alumnos/1 or /alumnos/1.json
   def show
+    @alumno = Alumno.find(params[:id])
+    @profesores = @alumno.materias.map(&:profesor).uniq
   end
 
   # GET /alumnos/new
   def new
     @alumno = Alumno.new
+    @colegios = Colegio.all
   end
 
   # GET /alumnos/1/edit
   def edit
+    @colegios = Colegio.all
   end
 
   # POST /alumnos or /alumnos.json
@@ -49,11 +53,15 @@ class AlumnosController < ApplicationController
 
   # DELETE /alumnos/1 or /alumnos/1.json
   def destroy
-    @alumno.destroy!
+    @alumno = Alumno.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to alumnos_url, notice: "Alumno was successfully destroyed." }
-      format.json { head :no_content }
+    begin
+      @alumno.destroy
+      redirect_to alumno_path, notice: "Colegio eliminado exitosamente."
+    rescue ActiveRecord::InvalidForeignKey => e
+      # Manejar el error de clave foránea
+      flash[:alert] = "No se puede eliminar el alumno porque está asociado a profesores o materias."
+      redirect_to alumno_path(@alumno)
     end
   end
 

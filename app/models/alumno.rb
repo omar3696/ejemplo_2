@@ -3,5 +3,6 @@ class Alumno < ApplicationRecord
   validates :colegio_id, presence: true
 
   has_many :notas
+  has_many :materias, through: :notas
   belongs_to :colegio
 end

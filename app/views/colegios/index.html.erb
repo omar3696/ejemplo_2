@@ -5,12 +5,16 @@
 <h1>Colegios</h1>
 
 <div id="colegios">
-  <% @colegios.each do |colegio| %>
-    <%= render colegio %>
-    <p>
-      <%= link_to "Show this colegio", colegio %>
-    </p>
-  <% end %>
+  <ul class="list-group">
+    <% @colegios.each do |colegio| %>
+      <li class="list-group-item">
+        Nombre de Colegio: <%=colegio.nombre%>
+        <p> 
+          <%= link_to "Mostrar este colegio", colegio, class: "btn btn-primary" %>   
+        </p>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
-<%= link_to "New colegio", new_colegio_path %>
+<%= link_to "Nuevo colegio", new_colegio_path, class: "btn btn-success mt-3" %>

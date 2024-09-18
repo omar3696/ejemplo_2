@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_13_171540) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_17_182322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,12 +40,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_13_171540) do
   end
 
   create_table "notas", force: :cascade do |t|
-    t.float "nota"
     t.bigint "alumno_id", null: false
     t.bigint "materia_id", null: false
     t.bigint "colegio_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "enero"
+    t.float "febrero"
+    t.float "marzo"
+    t.float "abril"
+    t.float "mayo"
+    t.float "junio"
+    t.float "julio"
+    t.float "agosto"
+    t.float "septiembre"
+    t.float "octubre"
+    t.float "noviembre"
+    t.float "diciembre"
+    t.float "promedio"
     t.index ["alumno_id"], name: "index_notas_on_alumno_id"
     t.index ["colegio_id"], name: "index_notas_on_colegio_id"
     t.index ["materia_id"], name: "index_notas_on_materia_id"

@@ -4,21 +4,17 @@
 
 <h1>Alumnos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Colegio</th>
-    </tr>
-  </thead>
-  <tbody>
+<div id="alumnos">
+  <ul class="list-group">
     <% @alumnos.each do |alumno| %>
-      <tr>
-        <td><%= alumno.nombre %></td>
-        <td><%= alumno.colegio.nombre %></td>   
-      </tr>
+      <li class="list-group-item">
+        Nombre: <%=alumno.nombre%>
+        <p> 
+          <%= link_to "Mostrar este alumno", alumno, class: "btn btn-primary" %>   
+        </p>
+      </li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+</div>
 
-<%= link_to "New alumno", new_alumno_path %>
+<%= link_to "Nuevo alumno", new_alumno_path, class: "btn btn-success mt-3" %>

@@ -1,10 +1,85 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @colegio %>
+<% content_for :title, "Colegios" %>
+
+<h1 class="display-6">Información del Colegio</h1>
+
+<% if flash[:alert] %>
+  <div id="flash-alert" class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre Colegio</th>
+      <th>Alumnos</th>
+      <th>Profesores</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @colegio.nombre %></td>
+      <td>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>Alumno</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @alumnos.each do |alumno| %>
+              <tr>
+                <td><%= link_to alumno.nombre, alumno_path(alumno), class: "text-primary" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>Profesor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @profesores.each do |profesor| %>
+              <tr>
+                <td><%= link_to profesor.nombre, profesor_path(profesor, class: "text-primary") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+      <td><%= link_to "Editar colegio", edit_colegio_path(@colegio), class: "btn btn-warning" %></td>
+      <td><%= button_to "Eliminar colegio", @colegio, method: :delete, class: "btn btn-danger" %></td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Alumnos</th>
+      <th>Materias</th>
+      <th>Promedio</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @notas.each do |nota| %>
+        <tr>
+        <td><%= nota.alumno.nombre %></td>
+        <td><%= link_to nota.materia.nombre, materia_path(nota.materia.id), class: "text-primary" %></td>
+        <td><%= link_to nota.promedio, nota_path(nota.id), class: "text-primary" %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
 
 <div>
-  <%= link_to "Edit this colegio", edit_colegio_path(@colegio) %> |
-  <%= link_to "Back to colegios", colegios_path %>
-
-  <%= button_to "Destroy this colegio", @colegio, method: :delete %>
+  <%= link_to "Regresar a colegios", colegios_path, class: "btn btn-secondary" %>
 </div>
+

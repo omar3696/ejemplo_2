@@ -4,19 +4,26 @@ class MateriasController < ApplicationController
   # GET /materias or /materias.json
   def index
     @materias = Materia.all
+    @alumnos = Alumno.all
   end
 
   # GET /materias/1 or /materias/1.json
   def show
+    @materia = Materia.find(params[:id])
+    @materias = Materia.includes(:notas).all
   end
 
   # GET /materias/new
   def new
     @materia = Materia.new
+    @colegios = Colegio.all
+    @profesores = Profesor.all
   end
 
   # GET /materias/1/edit
   def edit
+    @profesores = Profesor.all
+    @colegios = Colegio.all
   end
 
   # POST /materias or /materias.json
@@ -49,11 +56,15 @@ class MateriasController < ApplicationController
 
   # DELETE /materias/1 or /materias/1.json
   def destroy
-    @materia.destroy!
+    @materia = Materia.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to materias_url, notice: "Materia was successfully destroyed." }
-      format.json { head :no_content }
+    begin
+      @materia.destroy
+      redirect_to materia_path, notice: "Materia eliminado exitosamente."
+    rescue ActiveRecord::InvalidForeignKey => e
+      # Manejar el error de clave foránea
+      flash[:alert] = "No se puede eliminar el materia porque está asociado a notas."
+      redirect_to materia_path(@materia)
     end
   end
 

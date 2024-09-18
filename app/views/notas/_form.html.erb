@@ -12,26 +12,81 @@
   <% end %>
 
   <div>
-    <%= form.label :nota, style: "display: block" %>
-    <%= form.text_field :nota %>
+    <%= form.label :materia_id, style: "display: block" %>
+    <%= form.collection_select :materia_id, @materias, :id, :nombre, { prompt: "Selecciona una materia" }, { class: "custom-select" } %>
   </div>
 
   <div>
     <%= form.label :alumno_id, style: "display: block" %>
-    <%= form.text_field :alumno_id %>
-  </div>
-
-  <div>
-    <%= form.label :materia_id, style: "display: block" %>
-    <%= form.text_field :materia_id %>
+    <%= form.collection_select :alumno_id, @alumnos, :id, :nombre, { prompt: "Selecciona un alumno" }, { class: "custom-select" }%>
   </div>
 
   <div>
     <%= form.label :colegio_id, style: "display: block" %>
-    <%= form.text_field :colegio_id %>
+    <%= form.collection_select :colegio_id, @colegios, :id, :nombre, { prompt: "Selecciona un colegio" }, { class: "custom-select" } %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :enero, style: "display: block" %>
+    <%= form.number_field :enero %>
+  </div>
+
+  <div>
+    <%= form.label :febrero, style: "display: block" %>
+    <%= form.number_field :febrero %>
+  </div>
+
+  <div>
+    <%= form.label :marzo, style: "display: block" %>
+    <%= form.number_field :marzo %>
+  </div>
+
+  <div>
+    <%= form.label :abril, style: "display: block" %>
+    <%= form.number_field :abril %>
+  </div>
+
+  <div>
+    <%= form.label :mayo, style: "display: block" %>
+    <%= form.number_field :mayo %>
+  </div>
+
+  <div>
+    <%= form.label :junio, style: "display: block" %>
+    <%= form.number_field :junio %>
+  </div>
+
+  <div>
+    <%= form.label :julio, style: "display: block" %>
+    <%= form.number_field :julio %>
+  </div>
+
+  <div>
+    <%= form.label :agosto, style: "display: block" %>
+    <%= form.number_field :agosto %>
+  </div>
+
+  <div>
+    <%= form.label :septiembre, style: "display: block" %>
+    <%= form.number_field :septiembre %>
+  </div>
+
+  <div>
+    <%= form.label :octubre, style: "display: block" %>
+    <%= form.number_field :octubre %>
+  </div>
+
+  <div>
+    <%= form.label :noviembre, style: "display: block" %>
+    <%= form.number_field :noviembre %>
+  </div>
+
+  <div>
+    <%= form.label :diciembre, style: "display: block" %>
+    <%= form.number_field :diciembre %>
+  </div>
+
+  <div>
+    <%= form.submit "Guardar", class: "btn btn-success mt-3" %>
   </div>
 <% end %>

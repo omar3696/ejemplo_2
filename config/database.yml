@@ -22,9 +22,9 @@ default: &default
 
 development:
   <<: *default
-  database: app_db_development
+  database: baseDatos_development
     # Aquí debes agregar tu nombre de usuario de PostgreSQL
-  username: itprestamo  # O el nombre del rol de PostgreSQL que creaste
+  username: fboron  # O el nombre del rol de PostgreSQL que creaste
 
   # Aquí debes referenciar la variable de entorno que configuraste
   password: <%= ENV['DATABASE_PASSWORD'] %> 
@@ -61,8 +61,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: app_db_test
-  username: itprestamo  # Mismo nombre de usuario
+  database: baseDatos_test
+  username: fboron  # Mismo nombre de usuario
   password: <%= ENV['DATABASE_PASSWORD'] %>  # Variable de entorno
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -87,7 +87,7 @@ test:
 #
 production:
   <<: *default
-  database: app_db_production
-  username: itprestamo  # El nombre de usuario del rol en PostgreSQL
+  database: baseDatos_production
+  username: fboron  # El nombre de usuario del rol en PostgreSQL
   password: <%= ENV["DATABASE_PASSWORD"] %>
 

@@ -4,45 +4,17 @@
 
 <h1>Materias</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Alumno</th>
-      <th>Nota</th>
-      <th>Profesor</th>
-      <th>Colegio</th>
-    </tr>
-  </thead>
-  <tbody>
+<div id="materias">
+  <ul class="list-group">
     <% @materias.each do |materia| %>
-      <tr>
-        <td>
-          <li><%= materia.nombre %></li>
-        </td>
-        <td>
-          <ul>
-            <% materia.notas.each do |nota| %>
-              <li>Alumno: <%= nota.alumno.nombre %></li>
-            <% end %>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <% materia.notas.each do |nota| %>
-              <li>Nota: <%= nota.nota %></li>
-            <% end %>
-          </ul>
-        </td>
-        <td>
-          <li><%= materia.profesor.nombre %></li>
-        </td>
-        <td>
-          <li><%= materia.colegio.nombre %></li>
-        </td>   
-      </tr>
+      <li class="list-group-item">
+        Nombre de la materia: <%=materia.nombre%>
+        <p> 
+          <%= link_to "Mostrar esta materia", materia, class: "btn btn-primary" %>   
+        </p>
+      </li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+</div>
 
-<%= link_to "New materia", new_materia_path %>
+<%= link_to "Nueva materia", new_materia_path, class: "btn btn-success mt-3" %>

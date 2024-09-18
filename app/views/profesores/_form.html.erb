@@ -18,10 +18,10 @@
 
   <div>
     <%= form.label :colegio_id, style: "display: block" %>
-    <%= form.text_field :colegio_id %>
+    <%= form.collection_select :colegio_id, @colegios, :id, :nombre, { prompt: "Selecciona un colegio" }, { class: "custom-select" }%>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Guardar", class: "btn btn-success mt-3" %>
   </div>
 <% end %>

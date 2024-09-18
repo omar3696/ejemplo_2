@@ -3,7 +3,7 @@ class NotasController < ApplicationController
 
   # GET /notas or /notas.json
   def index
-    @notas = Nota.all
+    @notas = Nota.includes(:alumno, :materia, :alumno => :colegio).all
   end
 
   # GET /notas/1 or /notas/1.json
@@ -11,12 +11,18 @@ class NotasController < ApplicationController
   end
 
   # GET /notas/new
-  def new
+  def new 
     @nota = Nota.new
+    @alumnos = Alumno.all
+    @materias = Materia.all
+    @colegios = Colegio.all
   end
 
   # GET /notas/1/edit
   def edit
+    @alumnos = Alumno.all
+    @materias = Materia.all
+    @colegios = Colegio.all
   end
 
   # POST /notas or /notas.json
@@ -65,6 +71,23 @@ class NotasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def nota_params
-      params.require(:nota).permit(:nota, :alumno_id, :materia_id, :colegio_id)
+      params.require(:nota).permit(
+        :alumno_id, 
+        :materia_id, 
+        :colegio_id, 
+        :enero, 
+        :febrero, 
+        :marzo, 
+        :abril, 
+        :mayo, 
+        :junio, 
+        :julio, 
+        :agosto, 
+        :septiembre, 
+        :octubre, 
+        :noviembre, 
+        :diciembre, 
+        :promedio
+      )
     end
 end

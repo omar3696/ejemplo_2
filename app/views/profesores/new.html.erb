@@ -1,11 +1,11 @@
-<% content_for :title, "New profesor" %>
+<% content_for :title, "Nuevo profesor" %>
 
-<h1>New profesor</h1>
+<h1>Nuevo profesor</h1>
 
 <%= render "form", profesor: @profesor %>
 
 <br>
 
 <div>
-  <%= link_to "Back to profesores", profesores_path %>
+  <%= link_to "Volver a profesores", profesores_path, class: "btn btn-secondary" %>
 </div>

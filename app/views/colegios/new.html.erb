@@ -1,11 +1,11 @@
-<% content_for :title, "New colegio" %>
+<% content_for :title, "Nuevo colegio" %>
 
-<h1>New colegio</h1>
+<h1>Nuevo colegio</h1>
 
 <%= render "form", colegio: @colegio %>
 
 <br>
 
 <div>
-  <%= link_to "Back to colegios", colegios_path %>
+  <%= link_to "Volver a colegios", colegios_path, class: "btn btn-secondary" %>
 </div>

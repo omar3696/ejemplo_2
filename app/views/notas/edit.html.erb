@@ -1,12 +1,12 @@
-<% content_for :title, "Editing nota" %>
+<% content_for :title, "Editar nota" %>
 
-<h1>Editing nota</h1>
+<h1>Editar nota</h1>
 
 <%= render "form", nota: @nota %>
 
 <br>
 
 <div>
-  <%= link_to "Show this nota", @nota %> |
-  <%= link_to "Back to notas", notas_path %>
+  <%= link_to "Mostrar esta nota", @nota , class: "btn btn-secondary"%> |
+  <%= link_to "Regresar a notas", notas_path, class: "btn btn-secondary" %>
 </div>

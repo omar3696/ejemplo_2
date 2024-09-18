@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+ /* app/assets/stylesheets/application.css o .scss */
+.custom-select {
+    width: 300px; /* Ajusta el ancho según tus necesidades */
+  }
+  
