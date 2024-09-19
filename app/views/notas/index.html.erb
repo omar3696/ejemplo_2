@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 <% content_for :title, "Notas" %> 
 
-<h1 class="display-6">Tabla de Notas</h1>
-
+<h1 class="display-6">Tabla de Notas  </h1>
+<p class="fs-2">Aprobados</p>
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -11,12 +11,13 @@
       <th>Nombre Colegio</th>
       <th>Notas</th>
       <th>Promedio</th>
+      <th>Estado</th>
       <th>Editar</th>
       <th>Eliminar</th>
     </tr>
   </thead>
   <tbody>
-    <% @notas.each do |nota| %>
+    <% @notas_aprobadas.each do |nota| %>
       <tr>
         <td><%= nota.alumno.nombre %></td>
         <td><%= nota.materia.nombre %></td>
@@ -58,11 +59,101 @@
           </table>
         </td>
         <td><%= nota.promedio %></td>
-        <td><%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %></td>
-        <td><%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %></td>
+        <td class="<%= nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
+          <%= nota.estado %>
+        </td>
+        <td>
+        <% if can?(:edit, @notas) %>
+          <%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %>
+        <% end %>
+        </td>
+        <td>
+          <% if can?(:delete, @notas) %>
+            <%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "Nueva nota", new_nota_path, class: "btn btn-success mt-3" %>
+<p class="fs-2">Reprobados</p>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre Alumno</th>
+      <th>Nombre Materia</th>
+      <th>Nombre Colegio</th>
+      <th>Notas</th>
+      <th>Promedio</th>
+      <th>Estado</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notas_reprobadas.each do |nota| %>
+      <tr>
+        <td><%= nota.alumno.nombre %></td>
+        <td><%= nota.materia.nombre %></td>
+        <td><%= nota.alumno.colegio.nombre %></td>
+        <td>
+          <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>Enero</th>
+              <th>Febrero</th>
+              <th>Marzo</th>
+              <th>Abril</th>
+              <th>Mayo</th>
+              <th>Junio</th>
+              <th>Julio</th>
+              <th>Agosto</th>
+              <th>Septiembre</th>
+              <th>Octubre</th>
+              <th>Noviembre</th>
+              <th>Diciembre</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><%= nota.enero%></td>
+                <td><%= nota.febrero%></td>
+                <td><%= nota.marzo%></td>
+                <td><%= nota.abril%></td>
+                <td><%= nota.mayo%></td>
+                <td><%= nota.junio%></td>
+                <td><%= nota.julio%></td>
+                <td><%= nota.agosto%></td>
+                <td><%= nota.septiembre%></td>
+                <td><%= nota.octubre%></td>
+                <td><%= nota.noviembre%></td>
+                <td><%= nota.diciembre%></td>
+              </tr>
+          </tbody>
+          </table>
+        </td>
+        <td><%= nota.promedio %></td>
+        <td class="<%= nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
+          <%= nota.estado %>
+        </td>
+        <td>
+          <% if can?(:edit, @notas) %>
+            <%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %>
+          <% end %>
+        </td>
+        <td>
+          <% if can?(:delete, @notas) %>
+            <%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if can?(:create, @notas) %>
+  <%= link_to "Nueva nota", new_nota_path, class: "btn btn-success mt-3" %>
+<% end %>
+<br><br>
+<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>

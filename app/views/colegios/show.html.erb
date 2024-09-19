@@ -55,8 +55,16 @@
           </tbody>
         </table>
       </td>
-      <td><%= link_to "Editar colegio", edit_colegio_path(@colegio), class: "btn btn-warning" %></td>
-      <td><%= button_to "Eliminar colegio", @colegio, method: :delete, class: "btn btn-danger" %></td>
+      <td>
+        <% if can?(:edit, @colegio) %>
+          <%= link_to "Editar colegio", edit_colegio_path(@colegio), class: "btn btn-warning" %>
+        <% end %>
+      </td>
+      <td>
+        <% if can?(:destroy, @colegio) %>
+          <%= button_to "Eliminar colegio", @colegio, method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -82,4 +90,7 @@
 <div>
   <%= link_to "Regresar a colegios", colegios_path, class: "btn btn-secondary" %>
 </div>
+
+
+
 

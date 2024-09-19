@@ -1,19 +1,30 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
   resources :notas
   resources :materias
   resources :alumnos
   resources :profesores
   resources :colegios
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Ruta para verificar la salud de la aplicación
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/*
+  # Rutas para PWA
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Ruta raíz para usuarios autenticados
+  authenticated :usuario do
+    root 'colegios#index', as: :authenticated_root
+  end
+
+  # Ruta raíz para usuarios no autenticados
+  unauthenticated do
+    root 'devise#sessions', as: :unauthenticated_root
+  end
+
+  # Esta línea se elimina para evitar conflicto
+  # root to: 'home#index'
 end

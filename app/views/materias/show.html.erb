@@ -44,8 +44,16 @@
           </td>
           <td><%= link_to @materia.profesor.nombre, profesor_path(@materia.profesor.id), class: "text-primary" %></td>
           <td><%= link_to @materia.colegio.nombre, colegio_path(@materia.colegio.id), class: "text-primary" %></td>  
-          <td><%= link_to "Editar materia", edit_materia_path(@materia), class: "btn btn-warning" %></td> 
-          <td><%= button_to "Eliminar materia", @materia, method: :delete, class: "btn btn-danger" %></td> 
+          <td>
+            <% if can?(:edit, @materia) %>
+              <%= link_to "Editar materia", edit_materia_path(@materia), class: "btn btn-warning" %>
+            <% end %>
+          </td> 
+          <td>
+            <% if can?(:delete, @materia) %>
+              <%= button_to "Eliminar materia", @materia, method: :delete, class: "btn btn-danger" %>
+            <% end %>
+          </td> 
         </tr>
   </tbody>
 </table>

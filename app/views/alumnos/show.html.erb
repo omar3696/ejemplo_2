@@ -57,10 +57,14 @@
         </table>
       </td>
       <td>
-        <%= link_to "Editar alumno", edit_alumno_path(@alumno), class: "btn btn-warning" %>
+        <% if can?(:edit, @alumno) %>
+          <%= link_to "Editar alumno", edit_alumno_path(@alumno), class: "btn btn-warning" %>
+        <% end %>
       </td>
       <td>
-        <%= button_to "Eliminar alumno", @alumno, method: :delete, class: "btn btn-danger", data: { confirm: "¿Estás seguro de que deseas eliminar este alumno?" } %>
+        <% if can?(:edit, @alumno) %>
+          <%= button_to "Eliminar alumno", @alumno, method: :delete, class: "btn btn-danger", data: { confirm: "¿Estás seguro de que deseas eliminar este alumno?" } %>
+        <% end %>
       </td>
     </tr>
   </tbody>

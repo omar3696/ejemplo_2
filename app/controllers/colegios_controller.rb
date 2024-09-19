@@ -1,5 +1,7 @@
 class ColegiosController < ApplicationController
   before_action :set_colegio, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
+
 
   # GET /colegios or /colegios.json
   def index

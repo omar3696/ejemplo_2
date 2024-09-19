@@ -2,7 +2,7 @@
 
 <% content_for :title, "Notas" %>
 
-<h1 class="display-6">Tabla de Notas</h1>
+<h1 class="display-6">Tabla de Nota</h1>
 
 <table class="table table-striped table-bordered">
   <thead>
@@ -12,6 +12,7 @@
       <th>Nombre Colegio</th>
       <th>Notas</th>
       <th>Promedio</th>
+      <th>Estado</th>
       <th>Editar</th>
       <th>Eliminar</th>
     </tr>
@@ -58,8 +59,19 @@
     </table>
   </td>
   <td><%= @nota.promedio %></td>
-  <td><%= link_to "Editar", edit_nota_path(@nota), class: "btn btn-warning" %></td>
-  <td><%= button_to "Eliminar", @nota, method: :delete, class: "btn btn-danger" %></td>
+  <td class="<%= @nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
+    <%= @nota.estado %>
+  </td>
+  <td>
+    <% if can?(:edit, @nota) %>
+      <%= link_to "Editar", edit_nota_path(@nota), class: "btn btn-warning" %>
+    <% end %>
+  </td>
+  <td>
+    <% if can?(:delete, @nota) %>
+      <%= button_to "Eliminar", @nota, method: :delete, class: "btn btn-danger" %>
+    <% end %>
+  </td>
 </tr>
   </tbody>
 </table>

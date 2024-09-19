@@ -2,11 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-document.addEventListener("DOMContentLoaded", function() {
-    var flashAlert = document.getElementById('flash-alert');
-    if (flashAlert) {
-      setTimeout(function() {
-        flashAlert.style.display = 'none';
-      }, 5000); // 5000ms = 5 segundos
-    }
-  });
+// app/javascript/packs/application.js
+import Rails from "@rails/ujs"
+Rails.start()
+

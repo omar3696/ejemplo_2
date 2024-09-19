@@ -47,8 +47,16 @@
             </tbody>
           </table>
         </td>
-        <td><%= link_to "Editar profesor", edit_profesor_path(@profesor), class: "btn btn-warning" %></td>
-        <td><%= button_to "Eliminar profesor", @profesor, method: :delete, class: "btn btn-danger" %></td>
+        <td>
+          <% if can?(:edit, @profesor) %>
+            <%= link_to "Editar profesor", edit_profesor_path(@profesor), class: "btn btn-warning" %>
+          <% end %>
+        </td>
+        <td>
+          <% if can?(:delete, @profesor) %>
+            <%= button_to "Eliminar profesor", @profesor, method: :delete, class: "btn btn-danger" %>
+          <% end %>
+        </td>
       </tr>
   </tbody>
 </table>

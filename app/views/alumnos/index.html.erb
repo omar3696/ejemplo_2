@@ -17,4 +17,8 @@
   </ul>
 </div>
 
-<%= link_to "Nuevo alumno", new_alumno_path, class: "btn btn-success mt-3" %>
+<% if can?(:create, @alumnos) %>
+  <%= link_to "Nuevo alumno", new_alumno_path, class: "btn btn-success mt-3" %>
+<% end %>
+<br><br>
+<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>

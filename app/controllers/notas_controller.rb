@@ -1,13 +1,19 @@
 class NotasController < ApplicationController
   before_action :set_nota, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
+
+
 
   # GET /notas or /notas.json
   def index
-    @notas = Nota.includes(:alumno, :materia, :alumno => :colegio).all
+    @notas_aprobadas = Nota.aprobados
+    @notas_reprobadas = Nota.reprobados
+    @periodo = "año"
   end
 
   # GET /notas/1 or /notas/1.json
   def show
+    
   end
 
   # GET /notas/new

@@ -17,4 +17,8 @@
   </ul>
 </div>
 
-<%= link_to "Nueva materia", new_materia_path, class: "btn btn-success mt-3" %>
+<% if can?(:create, @materias) %>
+  <%= link_to "Nueva materia", new_materia_path, class: "btn btn-success mt-3" %>
+<% end %>
+<br><br>
+<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>
