@@ -5,4 +5,9 @@ class Alumno < ApplicationRecord
   has_many :notas
   has_many :materias, through: :notas
   belongs_to :colegio
+  has_one :usuario
+
+  def nombre_completo
+    "#{nombre}"
+  end
 end

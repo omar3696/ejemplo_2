@@ -2,17 +2,27 @@ class NotasController < ApplicationController
   before_action :set_nota, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
-
-
   # GET /notas or /notas.json
   def index
-    @notas_aprobadas = Nota.aprobados
-    @notas_reprobadas = Nota.reprobados
-    @periodo = "año"
+    if current_usuario.alumno?
+      @notas_aprobadas = Nota.aprobados.where(alumno_id: current_usuario.alumno_id)
+      @notas_reprobadas = Nota.reprobados.where(alumno_id: current_usuario.alumno_id)
+    elsif
+      @materias = current_usuario.profesor.materias
+      @notas_aprobadas = Nota.aprobados.where(materia_id: @materias.pluck(:id))
+      @notas_reprobadas = Nota.reprobados.where(materia_id: @materias.pluck(:id))
+    else
+      @notas_aprobadas = Nota.aprobados
+      @notas_reprobadas = Nota.reprobados
+    end
   end
 
   # GET /notas/1 or /notas/1.json
   def show
+    @nota = Nota.find(params[:id])
+    @alumno = @nota.alumno # Asegúrate de cargar el alumno relacionado
+    @materia = @nota.materia
+
     
   end
 

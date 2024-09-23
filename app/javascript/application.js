@@ -6,3 +6,31 @@ import "controllers"
 import Rails from "@rails/ujs"
 Rails.start()
 
+document.addEventListener("DOMContentLoaded", function() {
+    const rolAdmin = document.getElementById("rol_admin");
+    const rolProfesor = document.getElementById("rol_profesor");
+    const rolAlumno = document.getElementById("rol_alumno");
+  
+    const profesorSelect = document.getElementById("profesor-select");
+    const alumnoSelect = document.getElementById("alumno-select");
+  
+    function toggleSelectFields() {
+      profesorSelect.style.display = "none";
+      alumnoSelect.style.display = "none";
+  
+      if (rolProfesor.checked) {
+        profesorSelect.style.display = "block";
+      } else if (rolAlumno.checked) {
+        alumnoSelect.style.display = "block";
+      }
+    }
+  
+    rolAdmin.addEventListener("change", toggleSelectFields);
+    rolProfesor.addEventListener("change", toggleSelectFields);
+    rolAlumno.addEventListener("change", toggleSelectFields);
+  
+    // Run once on page load
+    toggleSelectFields();
+  });
+  
+

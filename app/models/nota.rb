@@ -6,10 +6,11 @@ class Nota < ApplicationRecord
   belongs_to :alumno
   belongs_to :materia
   belongs_to :colegio
+ # belongs_to :alumno, class_name: 'Usuario', foreign_key: 'alumno_id'
 
   before_save :calcular_promedio
 
-  scope :aprobados, -> { where('promedio >= ?', 80) }
+  scope :aprobados, -> { where('promedio >= ?', 65) }
   scope :reprobados, -> { where('promedio < ?', 65) }
 
 

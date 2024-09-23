@@ -5,6 +5,13 @@
 <h1 class="display-6">Información del Colegio</h1>
 
 <% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+
+<% if flash[:alert] %>
   <div id="flash-alert" class="alert alert-danger">
     <%= flash[:alert] %>
   </div>

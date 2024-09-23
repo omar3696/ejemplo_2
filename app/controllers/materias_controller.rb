@@ -5,8 +5,13 @@ class MateriasController < ApplicationController
 
   # GET /materias or /materias.json
   def index
-    @materias = Materia.all
-    @alumnos = Alumno.all
+    if current_usuario.profesor?
+      @materias = Materia.where(profesor_id: current_usuario.profesor_id)
+      @alumnos = Alumno.where(profesor_id: current_usuario.profesor_id)
+    else
+      @materias = Materia.all
+      @alumnos = Alumno.all
+    end
   end
 
   # GET /materias/1 or /materias/1.json

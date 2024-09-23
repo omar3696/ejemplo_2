@@ -12,12 +12,24 @@ class Users::SessionsController < Devise::SessionsController
   # def create
   #   super
   # end
+
   def create
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Inicio de sesión exitoso."
-      redirect_to root_path
+
+      # Redirige según el rol del usuario
+      case user.rol
+      when 'admin'
+        redirect_to admin_dashboard_path
+      when 'profesor'
+        redirect_to profesor_dashboard_path
+      when 'alumno'
+        redirect_to alumno_notas_path
+      else
+        redirect_to root_path
+      end
     else
       flash.now[:alert] = "Email o contraseña incorrectos."
       render :new

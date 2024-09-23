@@ -4,6 +4,13 @@
 
 <h1>Materias</h1>
 
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+
 <div id="materias">
   <ul class="list-group">
     <% @materias.each do |materia| %>

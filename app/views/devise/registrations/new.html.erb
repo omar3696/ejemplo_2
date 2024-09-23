@@ -3,6 +3,23 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <div>
+    <%= f.label :rol %><br>
+    <%= f.radio_button :rol, 'admin', id: 'rol_admin' %> Admin
+    <%= f.radio_button :rol, 'profesor', id: 'rol_profesor' %> Profesor
+    <%= f.radio_button :rol, 'alumno', id: 'rol_alumno' %> Alumno
+  </div>
+
+  <div id="profesor-select" style="display: none;">
+    <%= f.label :profesor_id, "Selecciona un Profesor" %><br>
+    <%= f.collection_select :profesor_id, Profesor.all, :id, :nombre_completo, prompt: "Selecciona un Profesor" %>
+  </div>
+
+  <div id="alumno-select" style="display: none;">
+    <%= f.label :alumno_id, "Selecciona un Alumno" %><br>
+    <%= f.collection_select :alumno_id, Alumno.all, :id, :nombre_completo, prompt: "Selecciona un Alumno" %>
+  </div>
+
   <div class="field">
     <%= f.label "Correo" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -21,14 +38,36 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :rol %>
-    <%= f.select :rol, options_for_select(['admin', 'profesor', 'alumno']) %>
-  </div>
-
   <div class="actions">
     <%= f.submit "Ingresar", class: "btn btn-success mt-3" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const rolAdmin = document.getElementById("rol_admin");
+    const rolProfesor = document.getElementById("rol_profesor");
+    const rolAlumno = document.getElementById("rol_alumno");
+
+    const profesorSelect = document.getElementById("profesor-select");
+    const alumnoSelect = document.getElementById("alumno-select");
+
+    function toggleSelectFields() {
+      profesorSelect.style.display = "none";
+      alumnoSelect.style.display = "none";
+
+      if (rolProfesor.checked) {
+        profesorSelect.style.display = "block";
+      } else if (rolAlumno.checked) {
+        alumnoSelect.style.display = "block";
+      }
+    }
+
+    rolAdmin.addEventListener("change", toggleSelectFields);
+    rolProfesor.addEventListener("change", toggleSelectFields);
+    rolAlumno.addEventListener("change", toggleSelectFields);
+  });
+</script>
