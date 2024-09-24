@@ -21,7 +21,7 @@ gem "jbuilder"
 
 gem 'devise'
 gem 'cancancan', '~> 3.0'
-
+gem 'rubyXL'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

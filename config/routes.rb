@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   devise_for :usuarios
-  resources :notas
+  resources :notas do
+    collection do
+      get :exportar_excel_aprobados
+      get :exportar_excel_reprobados
+      get :exportar_excel_todos
+    end
+  end
   resources :materias
-  resources :alumnos
+  resources :alumnos 
   resources :profesores
   resources :colegios
 
@@ -27,4 +33,7 @@ Rails.application.routes.draw do
 
   # Esta línea se elimina para evitar conflicto
   # root to: 'home#index'
+  namespace :api do
+    get 'notas', to: 'alumno_api#nota_carnet'
+  end
 end

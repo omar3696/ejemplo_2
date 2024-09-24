@@ -16,10 +16,13 @@ class Ability
       can :create, Nota
       can :update, Nota do |nota|
         nota.materia.profesor_id == usuario.profesor_id
-      end
+      end 
       can :delete, Nota do |nota|
         nota.materia.profesor_id == usuario.profesor_id
       end
+      can :exportar_excel_aprobados, Nota 
+      can :exportar_excel_reprobados, Nota 
+      can :exportar_excel_todos, Nota 
       can :read, Materia, profesor_id: usuario.profesor_id
       cannot :read, Colegio
       cannot :read, Alumno
