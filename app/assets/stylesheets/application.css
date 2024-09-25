@@ -19,12 +19,61 @@
     width: 300px; /* Ajusta el ancho según tus necesidades */
   }
 
-  .estado-aprobado {
-    background-color: green !important;
-    color: white !important;
+  .tamaño-tabla-notas {
+    width: 90%;
+    position: relative; 
+    top: 20px;
+    left: 20px;
   }
-  
-  .estado-reprobado {
-    background-color: red !important;
-    color: white !important;
+
+  .alumnos-aprobados-notas{
+    position: static;
   }
+
+  .alumnos-aprobados-notas{
+    position: static;
+  }
+
+  .sub-titulo-notas{
+    position: relative; 
+    top: 20px;
+    left: 20px;
+  }
+
+  .boton-exportar-notas{
+    position: relative; 
+    top: -35px;
+    left: 1740px;
+  }
+
+  .acciones-notas{
+    display: flex; 
+    justify-content: space-between; 
+    width: 30%;
+    padding: 5px;
+  }
+
+  .acciones-exportar-notas{
+    width: 33.33%; 
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .acciones-crear-notas{
+    width: 33.33%; 
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .acciones-cerrar-notas{
+    width: 33.33%;
+    height: 75px; 
+    margin: 5px;
+    
+  }
+
+  .posicion-boton-notas{
+    width: 100%;
+    height: 75px; 
+  }
+ 

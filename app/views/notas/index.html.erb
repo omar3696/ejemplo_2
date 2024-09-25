@@ -9,195 +9,214 @@
   </div>
 <% end %>
 
-<p class="fs-2">Aprobados</p>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Nombre Alumno</th>
-      <th>Nombre Materia</th>
-      <th>Nombre Colegio</th>
-      <th>Notas</th>
-      <th>Promedio</th>
-      <th>Estado</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-      <th>Mostrar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @notas_aprobadas.each do |nota| %>
-      <tr>
-        <td><%= nota.alumno.nombre %></td>
-        <td><%= nota.materia.nombre %></td>
-        <td><%= nota.alumno.colegio.nombre %></td>
-        <td>
-          <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Enero</th>
-              <th>Febrero</th>
-              <th>Marzo</th>
-              <th>Abril</th>
-              <th>Mayo</th>
-              <th>Junio</th>
-              <th>Julio</th>
-              <th>Agosto</th>
-              <th>Septiembre</th>
-              <th>Octubre</th>
-              <th>Noviembre</th>
-              <th>Diciembre</th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr>
-                <td><%= nota.enero%></td>
-                <td><%= nota.febrero%></td>
-                <td><%= nota.marzo%></td>
-                <td><%= nota.abril%></td>
-                <td><%= nota.mayo%></td>
-                <td><%= nota.junio%></td>
-                <td><%= nota.julio%></td>
-                <td><%= nota.agosto%></td>
-                <td><%= nota.septiembre%></td>
-                <td><%= nota.octubre%></td>
-                <td><%= nota.noviembre%></td>
-                <td><%= nota.diciembre%></td>
-              </tr>
-          </tbody>
-          </table>
-        </td>
-        <td><%= nota.promedio %></td>
-        <td class="<%= nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
-          <%= nota.estado %>
-        </td>
-        <td>
-        <% if can?(:edit, nota) %>
-          <%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %>
+
+<div class="alumnos-aprobados-notas">
+
+  <div class="sub-titulo-notas">
+    <p class="fs-2">Aprobados</p>
+  </div>
+  <br>
+
+  <div class="tamaño-tabla-notas">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre Alumno</th>
+          <th>Nombre Materia</th>
+          <th>Nombre Colegio</th>
+          <th>Notas</th>
+          <th>Promedio</th>
+          <th>Estado</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Mostrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notas_aprobadas.each do |nota| %>
+          <tr>
+            <td><%= nota.alumno.nombre %></td>
+            <td><%= nota.materia.nombre %></td>
+            <td><%= nota.alumno.colegio.nombre %></td>
+            <td>
+              <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Enero</th>
+                  <th>Febrero</th>
+                  <th>Marzo</th>
+                  <th>Abril</th>
+                  <th>Mayo</th>
+                  <th>Junio</th>
+                  <th>Julio</th>
+                  <th>Agosto</th>
+                  <th>Septiembre</th>
+                  <th>Octubre</th>
+                  <th>Noviembre</th>
+                  <th>Diciembre</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td><%= nota.enero%></td>
+                    <td><%= nota.febrero%></td>
+                    <td><%= nota.marzo%></td>
+                    <td><%= nota.abril%></td>
+                    <td><%= nota.mayo%></td>
+                    <td><%= nota.junio%></td>
+                    <td><%= nota.julio%></td>
+                    <td><%= nota.agosto%></td>
+                    <td><%= nota.septiembre%></td>
+                    <td><%= nota.octubre%></td>
+                    <td><%= nota.noviembre%></td>
+                    <td><%= nota.diciembre%></td>
+                  </tr>
+              </tbody>
+              </table>
+            </td>
+            <td><%= nota.promedio %></td>
+            <td class="<%= nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
+              <%= nota.estado %>
+            </td>
+            <td>
+            <% if can?(:edit, nota) %>
+              <%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %>
+            <% end %>
+            </td>
+            <td>
+              <% if can?(:delete, nota) %>
+                <%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "Mostrar", nota, class: "btn btn-primary" %>    
+            </td>
+          </tr>
         <% end %>
-        </td>
-        <td>
-          <% if can?(:delete, nota) %>
-            <%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to "Mostrar", nota, class: "btn btn-primary" %>    
-        </td>
-      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="boton-exportar-notas">
+    <% if can?(:exportar_excel_aprobados, Nota) %>
+    <%= link_to 'Exportar a Excel', exportar_excel_aprobados_notas_path, class: 'btn btn-primary' %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+
+</div>
 
 
-<% if can?(:exportar_excel_aprobados, Nota) %>
-  <h6>Exportar notas de alumnos aprobados</h6>
-<% end %>
+<div class="alumnos-reprobados-notas">
 
-<% if can?(:exportar_excel_aprobados, Nota) %>
-  <%= link_to 'Exportar a Excel', exportar_excel_aprobados_notas_path, class: 'btn btn-primary' %>
-<% end %>
+  <div class="sub-titulo-notas">
+    <p class="fs-2">Reprobados</p>
+  </div>
+  <br>
 
-<p class="fs-2">Reprobados</p>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Nombre Alumno</th>
-      <th>Nombre Materia</th>
-      <th>Nombre Colegio</th>
-      <th>Notas</th>
-      <th>Promedio</th>
-      <th>Estado</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-      <th>Mostrar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @notas_reprobadas.each do |nota| %>
-      <tr>
-        <td><%= nota.alumno.nombre %></td>
-        <td><%= nota.materia.nombre %></td>
-        <td><%= nota.alumno.colegio.nombre %></td>
-        <td>
-          <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Enero</th>
-              <th>Febrero</th>
-              <th>Marzo</th>
-              <th>Abril</th>
-              <th>Mayo</th>
-              <th>Junio</th>
-              <th>Julio</th>
-              <th>Agosto</th>
-              <th>Septiembre</th>
-              <th>Octubre</th>
-              <th>Noviembre</th>
-              <th>Diciembre</th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr>
-                <td><%= nota.enero%></td>
-                <td><%= nota.febrero%></td>
-                <td><%= nota.marzo%></td>
-                <td><%= nota.abril%></td>
-                <td><%= nota.mayo%></td>
-                <td><%= nota.junio%></td>
-                <td><%= nota.julio%></td>
-                <td><%= nota.agosto%></td>
-                <td><%= nota.septiembre%></td>
-                <td><%= nota.octubre%></td>
-                <td><%= nota.noviembre%></td>
-                <td><%= nota.diciembre%></td>
-              </tr>
-          </tbody>
-          </table>
-        </td>
-        <td><%= nota.promedio %></td>
-        <td class="<%= nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
-          <%= nota.estado %>
-        </td>
-        <td>
-          <% if can?(:edit, nota) %>
-            <%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %>
-          <% end %>
-        </td>
-        <td>
-          <% if can?(:delete, nota) %>
-            <%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to "Mostrar", nota, class: "btn btn-primary" %>    
-        </td>
-      </tr>
+  <div class="tamaño-tabla-notas">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre Alumno</th>
+          <th>Nombre Materia</th>
+          <th>Nombre Colegio</th>
+          <th>Notas</th>
+          <th>Promedio</th>
+          <th>Estado</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Mostrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notas_reprobadas.each do |nota| %>
+          <tr>
+            <td><%= nota.alumno.nombre %></td>
+            <td><%= nota.materia.nombre %></td>
+            <td><%= nota.alumno.colegio.nombre %></td>
+            <td>
+              <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Enero</th>
+                  <th>Febrero</th>
+                  <th>Marzo</th>
+                  <th>Abril</th>
+                  <th>Mayo</th>
+                  <th>Junio</th>
+                  <th>Julio</th>
+                  <th>Agosto</th>
+                  <th>Septiembre</th>
+                  <th>Octubre</th>
+                  <th>Noviembre</th>
+                  <th>Diciembre</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td><%= nota.enero%></td>
+                    <td><%= nota.febrero%></td>
+                    <td><%= nota.marzo%></td>
+                    <td><%= nota.abril%></td>
+                    <td><%= nota.mayo%></td>
+                    <td><%= nota.junio%></td>
+                    <td><%= nota.julio%></td>
+                    <td><%= nota.agosto%></td>
+                    <td><%= nota.septiembre%></td>
+                    <td><%= nota.octubre%></td>
+                    <td><%= nota.noviembre%></td>
+                    <td><%= nota.diciembre%></td>
+                  </tr>
+              </tbody>
+              </table>
+            </td>
+            <td><%= nota.promedio %></td>
+            <td class="<%= nota.estado == 'Aprobado' ? 'bg-success text-white' : 'bg-danger text-white' %>">
+              <%= nota.estado %>
+            </td>
+            <td>
+              <% if can?(:edit, nota) %>
+                <%= link_to "Editar", edit_nota_path(nota), class: "btn btn-warning" %>
+              <% end %>
+            </td>
+            <td>
+              <% if can?(:delete, nota) %>
+                <%= button_to "Eliminar", nota, method: :delete, class: "btn btn-danger" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "Mostrar", nota, class: "btn btn-primary" %>    
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="boton-exportar-notas">
+    <% if can?(:exportar_excel_reprobados, Nota) %>
+      <%= link_to 'Exportar a Excel', exportar_excel_reprobados_notas_path, class: 'btn btn-primary' %>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<% if can?(:exportar_excel_reprobados, Nota) %>
-  <h6>Exportar notas de alumnos reprobados</h6>
-<% end %>
+</div>
 
-<% if can?(:exportar_excel_reprobados, Nota) %>
-  <%= link_to 'Exportar a Excel', exportar_excel_reprobados_notas_path, class: 'btn btn-primary' %>
-<% end %>
+<div class="acciones-notas">
 
-<br><br>
+  <div class="acciones-exportar-notas">
+    <% if can?(:exportar_excel_todos, Nota) %>
+      <%= button_to 'Exportar a Excel todos los alumnos', exportar_excel_todos_notas_path, method: :get, class: 'btn btn-primary posicion-boton-notas' %>
+    <% end %>
+  </div>
 
-<% if can?(:exportar_excel_todos, Nota) %>
-<h6>Exportar notas de todos los alumnos</h6>
-<% end %>
+  <div class="acciones-crear-notas">
+    <% if can?(:create, Nota) %>
+      <%= button_to 'Nueva Nota', new_nota_path, method: :get, class: 'btn btn-success posicion-boton-notas' %>
+    <% end %>
+  </div>
 
-<% if can?(:exportar_excel_todos, Nota) %>
-<%= link_to 'Exportar a Excel', exportar_excel_todos_notas_path, class: 'btn btn-primary' %>
-<% end %>
+  <div class="acciones-cerrar-notas">
+      <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-notas" %>
+  </div>
 
-<br>
-
-<% if can?(:create, Nota) %>
-  <%= link_to "Nueva nota", new_nota_path, class: "btn btn-success mt-3" %>
-<% end %>
-<br><br>
-<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>
+</div>
