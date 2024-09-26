@@ -1,4 +1,6 @@
 class Api::AlumnoApiController < ApplicationController
+    before_action :authenticate_request
+
     def nota_carnet
         alumno = Alumno.find_by(carnet: params[:carnet])
 

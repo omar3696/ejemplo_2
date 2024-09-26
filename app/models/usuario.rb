@@ -23,6 +23,11 @@ class Usuario < ApplicationRecord
     rol == 'admin'
   end
 
+  def generate_token
+    payload = { usuario_id: id, exp: 10.minutes.from_now.to_i } 
+    JWT.encode(payload, "123456789", 'HS256') 
+  end
+
   private
 
   def solo_un_rol

@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   namespace :api do
     get 'notas', to: 'alumno_api#nota_carnet'
   end
+
+  post 'login', to: 'sesion#create'
 end

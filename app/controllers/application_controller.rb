@@ -49,4 +49,16 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+
+  def authenticate_request
+    token = request.headers['Authorization']
+    puts token
+    begin
+    decoded = JWT.decode(token, "123456789", true, { algorithm: 'HS256' })
+    decoded = decoded[0]
+    @current_usuario = Usuario.find(decoded["usuario_id"])
+    rescue JWT::DecodeError
+      render json: { error: 'Token no válido' }, status: :unauthorized
+    end
+  end
 end
