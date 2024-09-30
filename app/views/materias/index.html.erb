@@ -15,17 +15,97 @@
   <ul class="list-group">
     <% @materias.each do |materia| %>
       <li class="list-group-item">
-        Nombre de la materia: <%=materia.nombre%>
-        <p> 
-          <%= link_to "Mostrar esta materia", materia, class: "btn btn-primary" %>   
-        </p>
+
+        <div class="sub-titulo-notas">
+          <p class="fs-2"><%=materia.id%></p>
+        </div>
+        <br>
+
+        <div class=tamaño-materias>
+
+          <dl class="row">
+            <dt class="col-sm-3">Nombre de la materia:</dt>
+            <dd class="col-sm-9"><%=materia.nombre%></dd>
+
+            <dt class="col-sm-3">Id de la materias:</dt>
+            <dd class="col-sm-9"><%=materia.id%></dd>
+          </dl>
+
+          <div class="linea-borde-materias"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Profesores que imparten <%=materia.nombre%>:</dt>
+            <dd class="col-sm-9">
+              <div class=tamaño-tabla-materias>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Profesor</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <tr>
+                      <td><%=materia.profesor.id%></td>
+                      <td><%=materia.profesor.nombre%></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </dd>
+          </dl>
+
+          <div class="linea-borde-materias"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Alumnos que reciben <%=materia.nombre%>:</dt>
+            <dd class="col-sm-9">
+              <div class=tamaño-tabla-materias>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Alumno</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <% materia.notas.each do |nota| %>
+                      <tr>
+                        <td><%=nota.alumno.id%></td>
+                        <td><%=nota.alumno.nombre%></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </dd>
+          </dl>
+
+          <div class="linea-borde-materias"></div>
+
+
+          <dl class="row">
+            <dt class="col-sm-3">Mostrar esta materia</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Materia", materia, class: "btn btn-primary" %> </dd>
+          </dl>
+
+        </dl>
       </li>
     <% end %>
   </ul>
 </div>
 
-<% if can?(:create, @materias) %>
-  <%= link_to "Nueva materia", new_materia_path, class: "btn btn-success mt-3" %>
-<% end %>
-<br><br>
-<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>
+<div class="acciones-materias">
+
+  <div class="acciones-cerrar-materias">
+    <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-materias" %>
+  </div>
+
+  <div class="acciones-crear-materias">
+    <% if can?(:create, @materias) %>
+      <%= button_to "Nueva materia", new_materia_path, class: "btn btn-success posicion-boton-materias" %>
+    <% end %>
+  </div>
+
+</div>
+

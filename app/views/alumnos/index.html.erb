@@ -14,17 +14,78 @@
   <ul class="list-group">
     <% @alumnos.each do |alumno| %>
       <li class="list-group-item">
-        Nombre: <%=alumno.nombre%>
-        <p> 
-          <%= link_to "Mostrar este alumno", alumno, class: "btn btn-primary" %>   
-        </p>
+
+        <div class="sub-titulo-notas">
+          <p class="fs-2"><%=alumno.carnet%></p>
+        </div>
+        <br>
+
+        <div class=tamaño-alumnos>
+
+          <dl class="row">
+            <dt class="col-sm-3">Nombre del alumno:</dt>
+            <dd class="col-sm-9"><%=alumno.nombre%></dd>
+
+            <dt class="col-sm-3">Carnet del alumno:</dt>
+            <dd class="col-sm-9"><%=alumno.carnet%></dd>
+          </dl>
+
+          <div class="linea-borde-alumnos"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Materias asignadas:</dt>
+            <dd class="col-sm-9">
+              <div class=tamaño-tabla-alumnos>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Materia</th>
+                      <th scope="col">Promedio</th>
+                      <th scope="col">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <% alumno.materias.each do |materia| %>
+                      <% materia.notas.where(alumno_id: alumno.id).each do |nota| %>
+                        <tr>
+                          <td><%=materia.id%></td>
+                          <td><%=materia.nombre%></td>
+                          <td><%=nota.promedio%></td>
+                          <td><%=nota.estado%></td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </dd>
+          </dl>
+
+          <div class="linea-borde-alumnos"></div>
+
+
+          <dl class="row">
+            <dt class="col-sm-3">Mostrar este alumno</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Alumnos", alumno, class: "btn btn-primary" %> </dd>
+          </dl>
+
+        </dl>
       </li>
     <% end %>
   </ul>
 </div>
 
-<% if can?(:create, @alumnos) %>
-  <%= link_to "Nuevo alumno", new_alumno_path, class: "btn btn-success mt-3" %>
-<% end %>
-<br><br>
-<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>
+<div class="acciones-profesores">
+
+  <div class="acciones-cerrar-profesores">
+    <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-alumnos" %>
+  </div>
+
+  <div class="acciones-crear-profesores">
+    <% if can?(:create, @alumnos) %>
+      <%= button_to "Nuevo alumno", new_alumno_path, class: "btn btn-success posicion-boton-alumnos" %>
+    <% end %>
+  </div>
+  
+</div>

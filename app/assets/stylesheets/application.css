@@ -18,7 +18,8 @@
   .custom-select {
     width: 300px; /* Ajusta el ancho según tus necesidades */
   }
-
+  
+  /* VISTA DE NOTAS */
   .tamaño-tabla-notas {
     width: 90%;
     position: relative; 
@@ -30,7 +31,7 @@
     position: static;
   }
 
-  .alumnos-aprobados-notas{
+  .alumnos-reprobados-notas{
     position: static;
   }
 
@@ -43,7 +44,7 @@
   .boton-exportar-notas{
     position: relative; 
     top: -35px;
-    left: 1740px;
+    left: 1750px;
   }
 
   .acciones-notas{
@@ -69,11 +70,184 @@
     width: 33.33%;
     height: 75px; 
     margin: 5px;
-    
   }
 
   .posicion-boton-notas{
     width: 100%;
     height: 75px; 
   }
+
+  /* VISTA DE ALUMNO */
+  .tamaño-tabla-alumno {
+    width: 90%;
+    position: relative; 
+    top: 20px;
+    left: 20px;
+  }
+
+  .boton-exportar-pdf-alumno{
+    position: relative; 
+    top: -35px;
+    left: 1750px;
+  }
  
+  /* VISTA DE COLEGIOS */
+  .linea-borde-colegios {
+    width: 60%;               /* Ancho de la línea */
+    border-top: 2px solid #000; /* Grosor y color de la línea */
+    margin: 20px 0;            /* Espaciado arriba y abajo */
+  }
+
+  .tamaño-colegios{
+    width: 60%; 
+  }
+
+  .acciones-colegios{
+    display: flex; 
+    justify-content: space-between; 
+    width: 16%;
+    padding: 5px;
+    /*border: 2px solid #000;*/
+  }
+
+  .acciones-crear-colegios{
+    width: 50%; 
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .acciones-cerrar-colegios{
+    width: 50%;
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .posicion-boton-colegios{
+    width: 100%;
+    height: 75px; 
+  }
+
+  /* VISTA DE PROFESORES */
+  .linea-borde-profesores {
+    width: 60%;               /* Ancho de la línea */
+    border-top: 2px solid #000; /* Grosor y color de la línea */
+    margin: 20px 0;            /* Espaciado arriba y abajo */
+  }
+
+  .tamaño-profesores{
+    width: 100%; 
+  }
+
+  .tamaño-tabla1-profesores{
+    width: 30%; 
+  }
+
+  .acciones-profesores{
+    display: flex; 
+    justify-content: space-between; 
+    width: 16%;
+    padding: 5px;
+    /*border: 2px solid #000;*/
+  }
+
+  .acciones-crear-profesores{
+    width: 50%; 
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .acciones-cerrar-profesores{
+    width: 50%;
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .posicion-boton-profesores{
+    width: 100%;
+    height: 75px; 
+  }
+
+
+  /* VISTA DE ALUMNOS */
+  .linea-borde-alumnos {
+    width: 60%;               /* Ancho de la línea */
+    border-top: 2px solid #000; /* Grosor y color de la línea */
+    margin: 20px 0;            /* Espaciado arriba y abajo */
+  }
+
+  .tamaño-alumnos{
+    width: 100%; 
+  }
+
+  .tamaño-tabla-alumnos{
+    width: 30%; 
+  }
+
+  .acciones-alumnos{
+    display: flex; 
+    justify-content: space-between; 
+    width: 16%;
+    padding: 5px;
+    /*border: 2px solid #000;*/
+  }
+
+  .acciones-crear-alumnos{
+    width: 50%; 
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .acciones-cerrar-alumnos{
+    width: 50%;
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .posicion-boton-alumnos{
+    width: 100%;
+    height: 75px; 
+  }
+
+  /* VISTA DE MATERIAS */
+  .linea-borde-materias {
+    width: 60%;               /* Ancho de la línea */
+    border-top: 2px solid #000; /* Grosor y color de la línea */
+    margin: 20px 0;            /* Espaciado arriba y abajo */
+  }
+
+  .tamaño-materias{
+    width: 100%; 
+  }
+
+  .tamaño-tabla-materias{
+    width: 30%; 
+  }
+
+  .acciones-materias{
+    display: flex; 
+    justify-content: space-between; 
+    width: 16%;
+    padding: 5px;
+    /*border: 2px solid #000;*/
+  }
+
+  .acciones-crear-materias{
+    width: 50%; 
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .acciones-cerrar-materias{
+    width: 50%;
+    height: 75px; 
+    margin: 5px;
+  }
+
+  .posicion-boton-materias{
+    width: 100%;
+    height: 75px; 
+  }
+
+
+  
+  

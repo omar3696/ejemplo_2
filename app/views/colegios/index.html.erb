@@ -15,18 +15,60 @@
   <ul class="list-group">
     <% @colegios.each do |colegio| %>
       <li class="list-group-item">
-        Nombre de Colegio: <%=colegio.nombre%>
-        <p> 
-          <%= link_to "Mostrar este colegio", colegio, class: "btn btn-primary" %>   
-        </p>
+
+        <div class="sub-titulo-notas">
+          <p class="fs-2"><%=colegio.nombre%></p>
+        </div>
+        <br>
+
+        <div class=tamaño-colegio>
+          <dl class="row">
+            <dt class="col-sm-3">Nombre del colegio:</dt>
+            <dd class="col-sm-9"><%=colegio.nombre%></dd>
+
+            <dt class="col-sm-3">Direccion del colegio:</dt>
+            <dd class="col-sm-9"><%=colegio.direccion%></dd>
+          </dl>
+
+          <div class="linea-borde-colegios"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Mostrar este colegio</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar colegio", colegio, class: "btn btn-primary" %> </dd>
+
+            <dt class="col-sm-3">Mostrar todos los profesores</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Profesores", profesores_path(colegio), class: "btn btn-primary" %> </dd>
+
+            <dt class="col-sm-3">Mostrar todos los alumnos</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Alumnos", alumnos_path(colegio), class: "btn btn-primary" %> </dd>
+
+            <dt class="col-sm-3">Mostrar todas las materias</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Materias", materias_path(colegio), class: "btn btn-primary" %> </dd>
+
+            <dt class="col-sm-3">Mostrar todas las notas</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Notas", notas_path(colegio), class: "btn btn-primary" %> </dd>
+          </dl>
+
+          <div class="linea-borde"></div>
+
+        </div>
+
       </li>
     <% end %>
   </ul>
 </div>
 
-<% if can?(:create, @colegios) %>
-  <%= link_to "Nuevo colegio", new_colegio_path, class: "btn btn-success mt-3" %>
-<% end %>
-<br><br>
-<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>
 
+<div class="acciones-colegios">
+
+  <div class="acciones-cerrar-colegios">
+    <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-colegios" %>
+  </div>
+
+  <div class="acciones-crear-colegios">
+    <% if can?(:create, @colegios) %>
+      <%= button_to "Nuevo colegio", new_colegio_path, class: "btn btn-success posicion-boton-colegios" %>
+    <% end %>
+  </div>
+
+</div>

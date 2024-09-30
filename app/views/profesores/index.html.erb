@@ -15,17 +15,98 @@
   <ul class="list-group">
     <% @profesores.each do |profesor| %>
       <li class="list-group-item">
-        Nombre: <%=profesor.nombre%>
-        <p> 
-          <%= link_to "Mostrar este profesor", profesor, class: "btn btn-primary" %>   
-        </p>
+
+        <div class="sub-titulo-notas">
+         <p class="fs-2"><%=profesor.id%></p>
+        </div>
+        <br>
+
+        <div class=tamaño-profesores>
+
+          <dl class="row">
+            <dt class="col-sm-3">Nombre del profesor:</dt>
+            <dd class="col-sm-9"><%=profesor.nombre%></dd>
+
+            <dt class="col-sm-3">Id del profesor:</dt>
+            <dd class="col-sm-9"><%=profesor.id%></dd>
+          </dl>
+
+          <div class="linea-borde-colegios"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Materias asignadas:</dt>
+            <dd class="col-sm-9">
+              <div class=tamaño-tabla1-profesores>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Materia</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <% profesor.materias.each do |materia| %>
+                      <tr>
+                        <td><%=materia.id%></td>
+                        <td><%=materia.nombre%></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </dd>
+          </dl>
+
+          <div class="linea-borde-colegios"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Alumnos asignados:</dt>
+            <dd class="col-sm-9">
+              <div class=tamaño-tabla1-profesores>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Alumno</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <% profesor.alumnos.distinct.each do |alumno| %>
+                      <tr>
+                        <td><%=alumno.id%></td>
+                        <td><%=alumno.nombre%></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </dd>
+          </dl>
+
+          <div class="linea-borde-colegios"></div>
+
+          <dl class="row">
+            <dt class="col-sm-3">Mostrar este profesor</dt>
+            <dd class="col-sm-9"><%= link_to "Mostrar Profesor", profesor, class: "btn btn-primary" %> </dd>
+          </dl>
+
+        </dl>
+
       </li>
     <% end %>
   </ul>
 </div>
 
-<% if can?(:create, @profesores) %>
-  <%= link_to "Nuevo profesor", new_profesor_path, class: "btn btn-success mt-3" %>
-<% end %>
-<br><br>
-<%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger" %>
+<div class="acciones-profesores">
+
+  <div class="acciones-cerrar-profesores">
+    <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-profesores" %>
+  </div>
+
+  <div class="acciones-crear-profesores">
+    <% if can?(:create, @profesores) %>
+      <%= button_to "Nuevo profesor", new_profesor_path, class: "btn btn-success posicion-boton-profesores" %>
+    <% end %>
+  </div>
+
+</div>

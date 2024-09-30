@@ -204,9 +204,7 @@
 <div class="acciones-notas">
 
   <div class="acciones-exportar-notas">
-    <% if can?(:exportar_excel_todos, Nota) %>
-      <%= button_to 'Exportar a Excel todos los alumnos', exportar_excel_todos_notas_path, method: :get, class: 'btn btn-primary posicion-boton-notas' %>
-    <% end %>
+    <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-notas" %>
   </div>
 
   <div class="acciones-crear-notas">
@@ -216,7 +214,9 @@
   </div>
 
   <div class="acciones-cerrar-notas">
-      <%= button_to 'Cerrar sesión', destroy_usuario_session_path, method: :delete, class: "btn btn-danger posicion-boton-notas" %>
+      <% if can?(:exportar_excel_todos, Nota) %>
+      <%= button_to 'Exportar a Excel todos los alumnos', exportar_excel_todos_notas_path, method: :get, class: 'btn btn-primary posicion-boton-notas' %>
+    <% end %>
   </div>
 
 </div>

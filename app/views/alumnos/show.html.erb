@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green"><%= notice %></p> 
 
 <% content_for :title, "Alumnos" %>
 
@@ -16,66 +16,75 @@
   </div>
 <% end %>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Nombre Alumno</th>
-      <th>Colegio</th>
-      <th>Profesores</th>
-      <th>Notas</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr> 
-      <td><%= @alumno.nombre %></td>
-      <td><%= link_to @alumno.colegio.nombre, colegio_path(@alumno.colegio.id), class: "text-primary" %></td>
-      <td>
-        <table class="table table-sm">
-          <tbody>
-            <% @profesores.each do |profesor| %>
-              <tr>
-                <td><%= link_to profesor.nombre, profesor_path(profesor), class: "text-primary" %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-      <td>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Materia</th>
-              <th>Promedio</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @alumno.materias.each do |materia| %>
-              <% materia.notas.where(alumno_id: @alumno.id).each do |nota| %>
+<div class=tamaño-tabla-alumno>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre Alumno</th>
+        <th>Colegio</th>
+        <th>Profesores</th>
+        <th>Notas</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr> 
+        <td><%= @alumno.nombre %></td>
+        <td><%= link_to @alumno.colegio.nombre, colegio_path(@alumno.colegio.id), class: "text-primary" %></td>
+        <td>
+          <table class="table table-sm">
+            <tbody>
+              <% @profesores.each do |profesor| %>
                 <tr>
-                  <td><%= link_to materia.nombre, materia_path(materia.id), class: "text-primary" %></td>
-                  <td><%= link_to nota.promedio, nota_path(nota.id), class: "text-primary" %></td>
+                  <td><%= link_to profesor.nombre, profesor_path(profesor), class: "text-primary" %></td>
                 </tr>
               <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-      <td>
-        <% if can?(:edit, @alumno) %>
-          <%= link_to "Editar alumno", edit_alumno_path(@alumno), class: "btn btn-warning" %>
-        <% end %>
-      </td>
-      <td>
-        <% if can?(:edit, @alumno) %>
-          <%= button_to "Eliminar alumno", @alumno, method: :delete, class: "btn btn-danger", data: { confirm: "¿Estás seguro de que deseas eliminar este alumno?" } %>
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Materia</th>
+                <th>Promedio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @alumno.materias.each do |materia| %>
+                <% materia.notas.where(alumno_id: @alumno.id).each do |nota| %>
+                  <tr>
+                    <td><%= link_to materia.nombre, materia_path(materia.id), class: "text-primary" %></td>
+                    <td><%= link_to nota.promedio, nota_path(nota.id), class: "text-primary" %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <% if can?(:edit, @alumno) %>
+            <%= link_to "Editar alumno", edit_alumno_path(@alumno), class: "btn btn-warning" %>
+          <% end %>
+        </td>
+        <td>
+          <% if can?(:edit, @alumno) %>
+            <%= button_to "Eliminar alumno", @alumno, method: :delete, class: "btn btn-danger", data: { confirm: "¿Estás seguro de que deseas eliminar este alumno?" } %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
+<div class="boton-exportar-pdf-alumno">
+    <% if can?(:generar_pdf, Alumno) %>
+      <%= link_to 'Exportar a PDF', generar_pdf_alumno_path, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+<br>
 <div>
   <%= link_to "Regresar a alumnos", alumnos_path, class: "btn btn-secondary" %>
 </div>

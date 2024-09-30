@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     end
   end
   resources :materias
-  resources :alumnos 
+  resources :alumnos do
+    member do
+      get "generar_pdf", defaults: { format: :pdf }
+    end
+  end
   resources :profesores
   resources :colegios
 
